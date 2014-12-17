@@ -1,0 +1,14 @@
+{
+  "name": "xdebug-to-devtools-bridge",
+  "version": "0.0.1",
+  "description": "Manage communication between xDebug's remote debugger and DevTools' PHP debugger.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eric Andrew Lewis",
+  "license": "ISC",
+  "dependencies": {
+    "xml2js": "^0.4.4"
+  }
+}
