@@ -1,3 +1,6 @@
+/**
+ * A bridge between Xdebug's remote debugger protocol and a web socket.
+ */
 var net = require('net');
 var parseXMLString = require('xml2js').parseString;
 
@@ -12,12 +15,10 @@ server.on('connection', function(socket){
 
 		parseXMLString( xmlStatement, function( err, result ) {
 			if ( result.init ) {
-				// socket.write( 'feature_get -i 1 -n language_name\u0000' );
 				socket.write( 'breakpoint_set -i 1 -t line -f index.php -n 14\u0000' );
 				socket.write( 'run -i 1\u0000' );
 			}
 		});
 	});
-	// socket.pipe(socket);
 });
 server.listen(9000);
