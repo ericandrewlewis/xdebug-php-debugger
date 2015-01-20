@@ -1,12 +1,21 @@
 /**
  * A bridge between Xdebug's remote debugger protocol and a web socket.
  */
-var net = require('net');
-var parseXMLString = require('xml2js').parseString;
+var net = require('net'),
+    parseXMLString = require('xml2js').parseString,
+    io = require('socket.io');
 
-var server = new net.Server();
+var XdebugServer = new net.Server();
 
-server.on('connection', function(socket){
+/**
+ * When a connection is made to our Xdebug server from Xdebug.
+ */
+XdebugServer.on('connection', function(socket){
+	/**
+	 * When data comes from the Xdebug port, respond accordingly.
+	 *
+	 * @param  {buffer} data
+	 */
 	socket.on('data', function(data) {
 		var dataStringified = data.toString();
 		var splitData = dataStringified.split('\u0000');
@@ -21,4 +30,6 @@ server.on('connection', function(socket){
 		});
 	});
 });
-server.listen(9000);
+XdebugServer.listen(9000);
+
+var wsServer = new Server();
